@@ -1,6 +1,6 @@
 # Nginx
 ## Install
-```
+```sh
 yum install nginx
 systemctl enable nginx
 systemctl start nginx
@@ -8,18 +8,18 @@ systemctl start nginx
 
 ## Hide Nginx Server Version
 Edit `/etc/nginx/nginx.conf` and add the following line to http context:
-```
+```Nginx
 server_tokens off;
 ```
 
 After adding above line, save the file and restart Nginx server to take new changes into effect.
-```
+```sh
 systemctl restart nginx
 ```
 
 ## Add Virtual domain for wordpress
 Create new file `/etc/nginx/conf.d/example.com.conf` and add following lines:
-```
+```Nginx
 # Redirect HTTP -> HTTPS
 
 server {
@@ -93,22 +93,22 @@ server {
 ```
 
 Then:
-```
+```sh
 chown -R nginx:nginx /var/www/example.com
 ```
 
 Before restarting the Nginx service test the configuration to be sure that there are no syntax errors:
-```
+```sh
 nginx -t
 ```
 
 and we can restart Nginx by typing:
-```
+```sh
 systemctl restart nginx
 ```
 
 ## Error 413 wordpress
 Edit `/etc/nginx/nginx.conf` and add the following line to http context:
-```
+```Nginx
 client_max_body_size 32m;
 ```

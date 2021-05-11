@@ -24,7 +24,7 @@ sudo yum install -y curl wget vim unzip socat epel-release
 
 ### Install git
 Remove existing git package if installed:
-```
+```sh
 sudo yum remove -y git
 sudo yum groupinstall -y "Development Tools"
 sudo yum install -y gettext-devel openssl-devel perl-CPAN perl-devel zlib-devel curl-devel
@@ -40,7 +40,7 @@ git --version
 ```
 
 ### Install Node.js and npm
-```
+```sh
 curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
 sudo yum install -y nodejs
 node -v && npm -v
@@ -59,21 +59,21 @@ gpgkey=https://www.mongodb.org/static/pgp/server-4.2.asc
 ```
 
 run:
-```
+```sh
 sudo yum install -y mongodb-org
 sudo systemctl start mongod.service
 sudo systemctl enable mongod.service
 ```
 
 ### Install and configure NGINX
-```
+```sh
 sudo yum install -y nginx
 sudo systemctl enable nginx.service
 sudo systemctl start nginx.service
 ```
 
 Create a `/etc/nginx/conf.d/wiki.js.conf` file:
-```
+```Nginx
 server {
 
     listen [::]:443 ssl http2;
@@ -105,7 +105,7 @@ server {
 ```
 
 Check the NGINX configuration and reload NGINX:
-```
+```sh
 sudo nginx -t
 sudo systemctl reload nginx.service
 ```
@@ -113,14 +113,14 @@ sudo systemctl reload nginx.service
 ### Install and setup Wiki.js
 Create a document root directory: `sudo mkdir -p /var/www/wikijs`
 Change ownership of the `/var/www/wikijs directory` to `your_user`:
-```
+```sh
 sudo chown -R [your_user]:[your_user] /var/www/wikijs
 ```
 
 ***NOTE***: Replace your_user in the above command with your non-root user that you should have created as a prerequisite for this tutorial.
 
 From `/var/www/wikijs` directory, run the following command to fetch and install the latest Wiki.js application:
-```
+```sh
 cd /var/www/wikijs
 curl -sSo- https://wiki.js.org/install.sh | bash
 node wiki --version
@@ -128,12 +128,12 @@ node wiki --version
 
 Start the configuration wizard by running:
 
-```
+```sh
 node wiki configure
 ```
 
 ### Setup PM2 Process Manager
-```
+```sh
 /var/www/wikijs/node_modules/pm2/bin/pm2 startup
 /var/www/wikijs/node_modules/pm2/bin/pm2 save
 node wiki restart
