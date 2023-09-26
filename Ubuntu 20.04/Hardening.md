@@ -47,3 +47,19 @@ X11Forwarding no
 UseDNS no
 AllowUsers <user>
 ```
+
+### SSH Key-Based Authentication
+1. Creating SSH Keys
+```ssh
+ssh-keygen -t RSA -b 4096
+```
+
+2. Copying an SSH Public Key to Your Server
+
+	Copy the content of your `id_rsa.pub` file a file at `~/.ssh/authorized_keys` on your remote machine.
+
+### Disabling Password Authentication on your Server
+Edit `/etc/ssh/sshd_config`:
+```
+PasswordAuthentication no
+```
