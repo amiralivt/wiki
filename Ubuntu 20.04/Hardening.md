@@ -47,7 +47,6 @@ X11Forwarding no
 UseDNS no
 AllowUsers <user>
 ```
-
 ### SSH Key-Based Authentication
 1. Creating SSH Keys
 ```ssh
