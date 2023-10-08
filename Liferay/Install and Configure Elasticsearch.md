@@ -5,7 +5,7 @@
 Add this to `/etc/hosts`:
 
 ```
-<this server IP> es-node1
+<This server IP> es-node1
 <Liferay server IP> DOMAIN
 ```
 
@@ -58,8 +58,8 @@ sudo systemctl enable elasticsearch
 Stop liferay and create new file `/opt/liferay/osgi/configs/com.liferay.portal.search.elasticsearch7.configuration.ElasticsearchConfiguration.config`:
 
 ```
-productionModeEnabled=B"true"
-networkHostAddresses=["http://es-node1:9200"]
+productionModeEnabled=B"true"++
+networkHostAddresses=["http://DOMAIN:9200"]
 ```
 
 Start liferay, In the Control Panel, navigate to Configuration → Search and verify the Elasticsearch connection is active.
