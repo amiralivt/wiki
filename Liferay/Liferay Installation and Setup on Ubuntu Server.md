@@ -347,6 +347,7 @@ sudo mv /opt/liferay/portal-setup-wizard.properties /opt/liferay/tomcat/webapps/
 Add following lines to `portal-ext.properties`:
 
 ```txt
+# company.default.locale=fa_IR
 redirect.url.security.mode=domain
 redirect.url.ips.allowed=127.0.0.1,SERVER_IP
 redirect.url.domains.allowed=DOMAIN
@@ -355,6 +356,8 @@ http.header.version.verbosity=off
 
 layout.user.public.layouts.enabled=false
 layout.user.private.layouts.enabled=false
+
+live.users.enabled=true
 ```
 
 Install mod_jk:
