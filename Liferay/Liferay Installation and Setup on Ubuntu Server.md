@@ -296,6 +296,30 @@ Edit `/etc/apache2/mods-available/security2.conf` and comment this line:
 #IncludeOptional /usr/share/modsecurity-crs/*.load
 ```
 
+Add HSTS and some other headers `/etc/apache2/conf-available/security.conf`:
+
+```apache
+<IfModule mod_headers.c>
+Header always set X-Frame-Options SAMEORIGIN
+
+Header unset Server
+Header always unset X-Powered-By
+Header unset X-Powered-By
+Header unset X-CF-Powered-By
+Header unset X-Mod-Pagespeed
+Header unset X-Pingback
+Header unset X-Forwarded-Host
+
+Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+```
+
+Enable Headers module in Apache
+
+```bash
+sudo a2enmod headers
+```
+
 ## Install liferay
 
 ```bash
@@ -415,7 +439,9 @@ JkLogLevel		error
 	SSLCertificateFile /etc/letsencrypt/live/DOMAIN/fullchain.pem
 	SSLCertificateKeyFile /etc/letsencrypt/live/DOMAIN/privkey.pem
 	
-	SSLProtocol all -SSLv3 -TLSv1 -TLSv1.1
+	SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+	SSLCipherSuite kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:+kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES
+	SSLCompression off
 	Protocols h2 http/1.1
 </VirtualHost>
 </IfModule>
