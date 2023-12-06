@@ -300,17 +300,22 @@ Add HSTS and some other headers `/etc/apache2/conf-available/security.conf`:
 
 ```apache
 <IfModule mod_headers.c>
-Header always set X-Frame-Options SAMEORIGIN
+	Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+	Header always set X-Content-Type-Options "nosniff"
+	Header always set X-Frame-Options SAMEORIGIN
 
-Header unset Server
-Header always unset X-Powered-By
-Header unset X-Powered-By
-Header unset X-CF-Powered-By
-Header unset X-Mod-Pagespeed
-Header unset X-Pingback
-Header unset X-Forwarded-Host
+	Header unset Server
+	Header always unset X-Powered-By
+	Header unset X-Powered-By
+	Header unset X-CF-Powered-By
+	Header unset X-Mod-Pagespeed
+	Header unset X-Pingback
 
-Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+	Header unset X-Forwarded-Host
+
+	Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+	Header always set Referrer-Policy "same-origin"
+	Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
 </IfModule>
 ```
 
