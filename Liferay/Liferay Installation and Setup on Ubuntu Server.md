@@ -387,6 +387,8 @@ layout.user.public.layouts.enabled=false
 layout.user.private.layouts.enabled=false
 
 live.users.enabled=true
+
+jsonws.web.service.api.discoverable=false
 ```
 
 Install mod_jk:
