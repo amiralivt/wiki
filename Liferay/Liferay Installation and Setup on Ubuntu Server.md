@@ -76,7 +76,7 @@ AllowUsers <user>
 
 2. Copying an SSH Public Key to Your Server
 
-	Copy the content of your `id_rsa.pub` file to `~/.ssh/authorized_keys` on your remote machine.
+Copy the content of your `id_rsa.pub` file to `~/.ssh/authorized_keys` on your remote machine.
 
 ### Disabling Password Authentication on your Server
 
@@ -222,10 +222,10 @@ Add new conf file: `/etc/apache2/sites-available/DOMAIN.conf`:
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     
-	RewriteEngine on
-	RewriteCond %{SERVER_NAME} =DOMAIN [OR]
-	RewriteCond %{SERVER_NAME} =DOMAIN
-	RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
+    RewriteEngine on
+    RewriteCond %{SERVER_NAME} =DOMAIN [OR]
+    RewriteCond %{SERVER_NAME} =DOMAIN
+    RewriteRule ^ https://%{SERVER_NAME}%{REQUEST_URI} [END,NE,R=permanent]
 </VirtualHost>
 ```
 
@@ -242,8 +242,8 @@ Add new conf file: `/etc/apache2/sites-available/DOMAIN-le-ssl.conf`:
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     
-	SSLCertificateFile /etc/letsencrypt/live/DOMAIN/fullchain.pem
-	SSLCertificateKeyFile /etc/letsencrypt/live/DOMAIN/privkey.pem
+    SSLCertificateFile /etc/letsencrypt/live/DOMAIN/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/DOMAIN/privkey.pem
 </VirtualHost>
 </IfModule>
 ```
@@ -300,22 +300,22 @@ Add HSTS and some other headers `/etc/apache2/conf-available/security.conf`:
 
 ```apache
 <IfModule mod_headers.c>
-	Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
-	Header always set X-Content-Type-Options "nosniff"
-	Header always set X-Frame-Options SAMEORIGIN
+    Header always edit Set-Cookie ^(.*)$ $1;HttpOnly;Secure
+    Header always set X-Content-Type-Options "nosniff"
+    Header always set X-Frame-Options SAMEORIGIN
 
-	Header unset Server
-	Header always unset X-Powered-By
-	Header unset X-Powered-By
-	Header unset X-CF-Powered-By
-	Header unset X-Mod-Pagespeed
-	Header unset X-Pingback
+    Header unset Server
+    Header always unset X-Powered-By
+    Header unset X-Powered-By
+    Header unset X-CF-Powered-By
+    Header unset X-Mod-Pagespeed
+    Header unset X-Pingback
 
-	Header unset X-Forwarded-Host
+    Header unset X-Forwarded-Host
 
-	Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
-	Header always set Referrer-Policy "same-origin"
-	Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
+    Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains; preload"
+    Header always set Referrer-Policy "same-origin"
+    Header always set Permissions-Policy "geolocation=(), camera=(), microphone=()"
 </IfModule>
 ```
 
@@ -437,19 +437,19 @@ JkLogLevel		error
     ServerAlias www.DOMAIN
     #DocumentRoot /var/www/DOMAIN
     
-	JkUnMount /.well-known/* worker1
+    JkUnMount /.well-known/* worker1
     JkMount /* worker1
     
     ErrorLog ${APACHE_LOG_DIR}/error.log
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     
-	SSLCertificateFile /etc/letsencrypt/live/DOMAIN/fullchain.pem
-	SSLCertificateKeyFile /etc/letsencrypt/live/DOMAIN/privkey.pem
+    SSLCertificateFile /etc/letsencrypt/live/DOMAIN/fullchain.pem
+    SSLCertificateKeyFile /etc/letsencrypt/live/DOMAIN/privkey.pem
 	
-	SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
-	SSLCipherSuite kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:+kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES
-	SSLCompression off
-	Protocols h2 http/1.1
+    SSLProtocol all -SSLv2 -SSLv3 -TLSv1 -TLSv1.1
+    SSLCipherSuite kEECDH:+kEECDH+SHA:kEDH:+kEDH+SHA:+kEDH+CAMELLIA:kECDH:+kECDH+SHA:kRSA:+kRSA+SHA:+kRSA+CAMELLIA:!aNULL:!eNULL:!SSLv2:!RC4:!MD5:!DES:!EXP:!SEED:!IDEA:!3DES
+    SSLCompression off
+    Protocols h2 http/1.1
 </VirtualHost>
 </IfModule>
 ```
